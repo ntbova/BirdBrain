@@ -1,0 +1,489 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		443183DA283AADC7007ED54C /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 449CD2F3282702DA00C38CCE /* main.c */; };
+		443183DB283AADC7007ED54C /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 449CD2EB2826FE2F00C38CCE /* Makefile */; };
+		4464BA16282C6B9F00D46BC9 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 449CD2F3282702DA00C38CCE /* main.c */; };
+		449CD2F12827026A00C38CCE /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 449CD2EB2826FE2F00C38CCE /* Makefile */; };
+		44E7128E29F8883F00E7D208 /* game.c in Sources */ = {isa = PBXBuildFile; fileRef = 44E7128D29F8883F00E7D208 /* game.c */; };
+		44E7128F29F8883F00E7D208 /* game.c in Sources */ = {isa = PBXBuildFile; fileRef = 44E7128D29F8883F00E7D208 /* game.c */; };
+		44E7129429F8B53900E7D208 /* input.h in Headers */ = {isa = PBXBuildFile; fileRef = 44E7129229F8B53900E7D208 /* input.h */; };
+		44E7129529F8B53900E7D208 /* input.h in Headers */ = {isa = PBXBuildFile; fileRef = 44E7129229F8B53900E7D208 /* input.h */; };
+		44E7129629F8B53900E7D208 /* input.c in Sources */ = {isa = PBXBuildFile; fileRef = 44E7129329F8B53900E7D208 /* input.c */; };
+		44E7129729F8B53900E7D208 /* input.c in Sources */ = {isa = PBXBuildFile; fileRef = 44E7129329F8B53900E7D208 /* input.c */; };
+		44E7129A29F8B6C500E7D208 /* inits.h in Headers */ = {isa = PBXBuildFile; fileRef = 44E7129829F8B6C500E7D208 /* inits.h */; };
+		44E7129B29F8B6C500E7D208 /* inits.h in Headers */ = {isa = PBXBuildFile; fileRef = 44E7129829F8B6C500E7D208 /* inits.h */; };
+		44E7129C29F8B6C500E7D208 /* inits.c in Sources */ = {isa = PBXBuildFile; fileRef = 44E7129929F8B6C500E7D208 /* inits.c */; };
+		44E7129D29F8B6C500E7D208 /* inits.c in Sources */ = {isa = PBXBuildFile; fileRef = 44E7129929F8B6C500E7D208 /* inits.c */; };
+		44E712A029F8B9AC00E7D208 /* gfx.h in Headers */ = {isa = PBXBuildFile; fileRef = 44E7129E29F8B9AC00E7D208 /* gfx.h */; };
+		44E712A129F8B9AC00E7D208 /* gfx.h in Headers */ = {isa = PBXBuildFile; fileRef = 44E7129E29F8B9AC00E7D208 /* gfx.h */; };
+		44E712A229F8B9AC00E7D208 /* gfx.c in Sources */ = {isa = PBXBuildFile; fileRef = 44E7129F29F8B9AC00E7D208 /* gfx.c */; };
+		44E712A329F8B9AC00E7D208 /* gfx.c in Sources */ = {isa = PBXBuildFile; fileRef = 44E7129F29F8B9AC00E7D208 /* gfx.c */; };
+		44E712A629F8B9ED00E7D208 /* helpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 44E712A429F8B9ED00E7D208 /* helpers.h */; };
+		44E712A729F8B9ED00E7D208 /* helpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 44E712A429F8B9ED00E7D208 /* helpers.h */; };
+		44E712A829F8B9ED00E7D208 /* helpers.c in Sources */ = {isa = PBXBuildFile; fileRef = 44E712A529F8B9ED00E7D208 /* helpers.c */; };
+		44E712A929F8B9ED00E7D208 /* helpers.c in Sources */ = {isa = PBXBuildFile; fileRef = 44E712A529F8B9ED00E7D208 /* helpers.c */; };
+		44E712AC29F9FFD900E7D208 /* physics.h in Headers */ = {isa = PBXBuildFile; fileRef = 44E712AA29F9FFD900E7D208 /* physics.h */; };
+		44E712AD29F9FFDA00E7D208 /* physics.h in Headers */ = {isa = PBXBuildFile; fileRef = 44E712AA29F9FFD900E7D208 /* physics.h */; };
+		44E712AE29F9FFDA00E7D208 /* physics.c in Sources */ = {isa = PBXBuildFile; fileRef = 44E712AB29F9FFD900E7D208 /* physics.c */; };
+		44E712AF29F9FFDA00E7D208 /* physics.c in Sources */ = {isa = PBXBuildFile; fileRef = 44E712AB29F9FFD900E7D208 /* physics.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		443183E1283AADC7007ED54C /* libBirdBrain Debug.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "libBirdBrain Debug.dylib"; sourceTree = BUILT_PRODUCTS_DIR; };
+		449CD2E32826FDCA00C38CCE /* libBirdBrain Sim.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "libBirdBrain Sim.dylib"; sourceTree = BUILT_PRODUCTS_DIR; };
+		449CD2EB2826FE2F00C38CCE /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		449CD2F3282702DA00C38CCE /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = main.c; path = src/main.c; sourceTree = "<group>"; };
+		44E7128D29F8883F00E7D208 /* game.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = game.c; path = src/game.c; sourceTree = "<group>"; };
+		44E7129029F88D8E00E7D208 /* consts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = consts.h; path = src/consts.h; sourceTree = "<group>"; };
+		44E7129129F8940100E7D208 /* game.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = game.h; path = src/game.h; sourceTree = "<group>"; };
+		44E7129229F8B53900E7D208 /* input.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = input.h; path = src/input.h; sourceTree = "<group>"; };
+		44E7129329F8B53900E7D208 /* input.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = input.c; path = src/input.c; sourceTree = "<group>"; };
+		44E7129829F8B6C500E7D208 /* inits.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = inits.h; path = src/inits.h; sourceTree = "<group>"; };
+		44E7129929F8B6C500E7D208 /* inits.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = inits.c; path = src/inits.c; sourceTree = "<group>"; };
+		44E7129E29F8B9AC00E7D208 /* gfx.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = gfx.h; path = src/gfx.h; sourceTree = "<group>"; };
+		44E7129F29F8B9AC00E7D208 /* gfx.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = gfx.c; path = src/gfx.c; sourceTree = "<group>"; };
+		44E712A429F8B9ED00E7D208 /* helpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = helpers.h; path = src/helpers.h; sourceTree = "<group>"; };
+		44E712A529F8B9ED00E7D208 /* helpers.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = helpers.c; path = src/helpers.c; sourceTree = "<group>"; };
+		44E712AA29F9FFD900E7D208 /* physics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = physics.h; path = src/physics.h; sourceTree = "<group>"; };
+		44E712AB29F9FFD900E7D208 /* physics.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = physics.c; path = src/physics.c; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		443183DC283AADC7007ED54C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		449CD2E12826FDCA00C38CCE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		449CD2DA2826FDCA00C38CCE = {
+			isa = PBXGroup;
+			children = (
+				44E712AA29F9FFD900E7D208 /* physics.h */,
+				44E712AB29F9FFD900E7D208 /* physics.c */,
+				44E712A429F8B9ED00E7D208 /* helpers.h */,
+				44E712A529F8B9ED00E7D208 /* helpers.c */,
+				44E7129E29F8B9AC00E7D208 /* gfx.h */,
+				44E7129F29F8B9AC00E7D208 /* gfx.c */,
+				44E7129829F8B6C500E7D208 /* inits.h */,
+				44E7129929F8B6C500E7D208 /* inits.c */,
+				44E7129229F8B53900E7D208 /* input.h */,
+				44E7129329F8B53900E7D208 /* input.c */,
+				44E7129129F8940100E7D208 /* game.h */,
+				44E7129029F88D8E00E7D208 /* consts.h */,
+				44E7128D29F8883F00E7D208 /* game.c */,
+				449CD2F3282702DA00C38CCE /* main.c */,
+				449CD2EB2826FE2F00C38CCE /* Makefile */,
+				449CD2E42826FDCA00C38CCE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		449CD2E42826FDCA00C38CCE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				449CD2E32826FDCA00C38CCE /* libBirdBrain Sim.dylib */,
+				443183E1283AADC7007ED54C /* libBirdBrain Debug.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		443183D8283AADC7007ED54C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				44E712A129F8B9AC00E7D208 /* gfx.h in Headers */,
+				44E712AD29F9FFDA00E7D208 /* physics.h in Headers */,
+				44E7129B29F8B6C500E7D208 /* inits.h in Headers */,
+				44E712A729F8B9ED00E7D208 /* helpers.h in Headers */,
+				44E7129529F8B53900E7D208 /* input.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		449CD2DF2826FDCA00C38CCE /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				44E712A029F8B9AC00E7D208 /* gfx.h in Headers */,
+				44E712AC29F9FFD900E7D208 /* physics.h in Headers */,
+				44E7129A29F8B6C500E7D208 /* inits.h in Headers */,
+				44E712A629F8B9ED00E7D208 /* helpers.h in Headers */,
+				44E7129429F8B53900E7D208 /* input.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		443183D7283AADC7007ED54C /* BirdBrain Debug */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 443183DE283AADC7007ED54C /* Build configuration list for PBXNativeTarget "BirdBrain Debug" */;
+			buildPhases = (
+				443183D8283AADC7007ED54C /* Headers */,
+				443183D9283AADC7007ED54C /* Sources */,
+				443183DC283AADC7007ED54C /* Frameworks */,
+				443183DD283AADC7007ED54C /* Compile PDX */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "BirdBrain Debug";
+			productName = PlayInvaders;
+			productReference = 443183E1283AADC7007ED54C /* libBirdBrain Debug.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+		449CD2E22826FDCA00C38CCE /* BirdBrain Sim */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 449CD2E72826FDCA00C38CCE /* Build configuration list for PBXNativeTarget "BirdBrain Sim" */;
+			buildPhases = (
+				449CD2DF2826FDCA00C38CCE /* Headers */,
+				449CD2E02826FDCA00C38CCE /* Sources */,
+				449CD2E12826FDCA00C38CCE /* Frameworks */,
+				449CD2EE2826FF6700C38CCE /* Compile PDX */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "BirdBrain Sim";
+			productName = PlayInvaders;
+			productReference = 449CD2E32826FDCA00C38CCE /* libBirdBrain Sim.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		449CD2DB2826FDCA00C38CCE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1330;
+				TargetAttributes = {
+					449CD2E22826FDCA00C38CCE = {
+						CreatedOnToolsVersion = 13.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 449CD2DE2826FDCA00C38CCE /* Build configuration list for PBXProject "BirdBrain" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 449CD2DA2826FDCA00C38CCE;
+			productRefGroup = 449CD2E42826FDCA00C38CCE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				449CD2E22826FDCA00C38CCE /* BirdBrain Sim */,
+				443183D7283AADC7007ED54C /* BirdBrain Debug */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		443183DD283AADC7007ED54C /* Compile PDX */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Compile PDX";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\ncp \"${TARGET_BUILD_DIR}/${EXECUTABLE_NAME}\" Source/pdex.dylib\ntouch Source/pdex.bin\nmake debug\n";
+		};
+		449CD2EE2826FF6700C38CCE /* Compile PDX */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Compile PDX";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\ncp \"${TARGET_BUILD_DIR}/${EXECUTABLE_NAME}\" Source/pdex.dylib\ntouch Source/pdex.bin\nmake\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		443183D9283AADC7007ED54C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				44E712A929F8B9ED00E7D208 /* helpers.c in Sources */,
+				44E7129729F8B53900E7D208 /* input.c in Sources */,
+				44E7129D29F8B6C500E7D208 /* inits.c in Sources */,
+				44E7128F29F8883F00E7D208 /* game.c in Sources */,
+				44E712A329F8B9AC00E7D208 /* gfx.c in Sources */,
+				44E712AF29F9FFDA00E7D208 /* physics.c in Sources */,
+				443183DA283AADC7007ED54C /* main.c in Sources */,
+				443183DB283AADC7007ED54C /* Makefile in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		449CD2E02826FDCA00C38CCE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				44E712A829F8B9ED00E7D208 /* helpers.c in Sources */,
+				44E7129629F8B53900E7D208 /* input.c in Sources */,
+				44E7129C29F8B6C500E7D208 /* inits.c in Sources */,
+				44E7128E29F8883F00E7D208 /* game.c in Sources */,
+				44E712A229F8B9AC00E7D208 /* gfx.c in Sources */,
+				44E712AE29F9FFDA00E7D208 /* physics.c in Sources */,
+				4464BA16282C6B9F00D46BC9 /* main.c in Sources */,
+				449CD2F12827026A00C38CCE /* Makefile in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		443183DF283AADC7007ED54C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"PLAYDATE_SIMULATOR=1",
+					"TARGET_EXTENSION=1",
+				);
+				HEADER_SEARCH_PATHS = /Users/bovan/Developer/PlaydateSDK/C_API;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		443183E0283AADC7007ED54C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"PLAYDATE_SIMULATOR=1",
+					"TARGET_EXTENSION=1",
+				);
+				HEADER_SEARCH_PATHS = /Users/bovan/Developer/PlaydateSDK/C_API;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		449CD2E52826FDCA00C38CCE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		449CD2E62826FDCA00C38CCE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		449CD2E82826FDCA00C38CCE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"PLAYDATE_SIMULATOR=1",
+					"TARGET_EXTENSION=1",
+				);
+				HEADER_SEARCH_PATHS = /Users/bovan/Developer/PlaydateSDK/C_API;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		449CD2E92826FDCA00C38CCE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"PLAYDATE_SIMULATOR=1",
+					"TARGET_EXTENSION=1",
+				);
+				HEADER_SEARCH_PATHS = /Users/bovan/Developer/PlaydateSDK/C_API;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		443183DE283AADC7007ED54C /* Build configuration list for PBXNativeTarget "BirdBrain Debug" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				443183DF283AADC7007ED54C /* Debug */,
+				443183E0283AADC7007ED54C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		449CD2DE2826FDCA00C38CCE /* Build configuration list for PBXProject "BirdBrain" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				449CD2E52826FDCA00C38CCE /* Debug */,
+				449CD2E62826FDCA00C38CCE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		449CD2E72826FDCA00C38CCE /* Build configuration list for PBXNativeTarget "BirdBrain Sim" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				449CD2E82826FDCA00C38CCE /* Debug */,
+				449CD2E92826FDCA00C38CCE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 449CD2DB2826FDCA00C38CCE /* Project object */;
+}
