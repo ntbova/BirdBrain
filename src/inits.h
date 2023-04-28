@@ -12,6 +12,7 @@
 #include "consts.h"
 
 void initSound(GameState* state);
+void initGraphics(GameState* state);
 void checkInitGameOver(GameState* state);
 void resetEnemyPosition(GameState* state);
 void resetPlayerPosition(GameState* state);

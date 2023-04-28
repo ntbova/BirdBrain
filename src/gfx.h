@@ -13,7 +13,5 @@
 #include "consts.h"
 
 void renderAssets(GameState* state);
-LCDBitmap* loadBitmapFromPath(PlaydateAPI* pd, char* path);
-LCDSprite* loadSpriteFromBitmap(PlaydateAPI* pd, LCDBitmap* bmp, LCDBitmapFlip flip);
 
 #endif /* gfx_h */

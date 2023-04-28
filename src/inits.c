@@ -8,6 +8,20 @@
 #include "inits.h"
 #include "consts.h"
 
+
+static LCDBitmap* loadBitmapFromPath(PlaydateAPI* pd, char* path) {
+    const char *err = NULL;
+    struct LCDBitmap* bmp = pd->graphics->loadBitmap(path, &err);
+    if ( err != NULL ) { pd->system->logToConsole("Error loading image: %s", err); }
+    return bmp;
+}
+
+static LCDSprite* loadSpriteFromBitmap(PlaydateAPI* pd, LCDBitmap* bmp, LCDBitmapFlip flip) {
+    struct LCDSprite* pathSprite = pd->sprite->newSprite();
+    pd->sprite->setImage(pathSprite, bmp, flip);
+    return pathSprite;
+}
+
 void initSound(GameState* state) {
     state->player_fire_synth = state->pd->sound->synth->newSynth();
     state->pd->sound->synth->setWaveform(state->player_fire_synth, kWaveformTriangle);
@@ -22,6 +36,11 @@ void initSound(GameState* state) {
     state->pd->sound->synth->setDecayTime(state->enemy_fire_synth, 0.05);
     state->pd->sound->synth->setSustainLevel(state->enemy_fire_synth, 0.3);
     state->pd->sound->synth->setReleaseTime(state->enemy_fire_synth, 0.1);
+}
+
+void initGraphics(GameState* state) {
+    state->player_bird_bitmap = loadBitmapFromPath(state->pd, "images/plane1");
+    state->player_bird_sprite = loadSpriteFromBitmap(state->pd, state->player_bird_bitmap, kBitmapUnflipped);
 }
 
 void checkInitGameOver(GameState* state) {
@@ -56,8 +75,8 @@ void resetEnemyPosition(GameState* state) {
 }
 
 void resetPlayerPosition(GameState* state) {
-    state->ship_pos_x = MAX_WIDTH; state->ship_pos_x /= 2;
-    state->ship_pos_y = MAX_HEIGHT; state->ship_pos_y -= 15;
+    state->pd->sprite->moveTo(state->player_bird_sprite, MIDPOINT_WIDTH, MIDPOINT_HEIGHT);
+    state->player_rot = 0;
 }
 
 void initGameRunning(GameState* state) {
@@ -68,6 +87,8 @@ void initGameRunning(GameState* state) {
     state->curr_lives = STARTING_LIVES;
     state->curr_score_multiplier = SCORE_STARTING_MULTIPLIER;
     state->enemy_speed_x = ENEMY_STARTING_SPEED; state->enemy_speed_y = ENEMY_STARTING_SPEED;
+    
+    state->pd->sprite->addSprite(state->player_bird_sprite);
     
     resetPlayerPosition(state);
     

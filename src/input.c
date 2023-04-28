@@ -17,14 +17,10 @@ void checkButtons(GameState* state) {
     state->pd->system->getButtonState(&current, &pushed, NULL);
     
     if (current & kButtonRight) {
-        if (state->ship_pos_x < MAX_WIDTH - PLAYER_WIDTH ) {
-            state->ship_pos_x += PLAYER_SPEED;
-        }
+        state->player_rot += PLAYER_SPEED;
     }
     else if (current & kButtonLeft) {
-        if (state->ship_pos_x > 0 ) {
-            state->ship_pos_x -= PLAYER_SPEED;
-        }
+        state->player_rot -= PLAYER_SPEED;
     }
     
     if (pushed & kButtonA || pushed & kButtonB || pushed & kButtonUp) { shootBullets(state); }
@@ -32,8 +28,5 @@ void checkButtons(GameState* state) {
 
 void checkCrank(GameState* state) {
     float change = state->pd->system->getCrankChange();
-    int newPlayPosX = state->ship_pos_x + (change * PLAYER_CRANK_SPEED);
-    if (newPlayPosX < 0) { newPlayPosX = 0; }
-    else if (newPlayPosX > MAX_WIDTH - PLAYER_WIDTH) { newPlayPosX = MAX_WIDTH - PLAYER_WIDTH; }
-    state->ship_pos_x = newPlayPosX;
+    state->player_rot = state->player_rot + (change * PLAYER_CRANK_SPEED);
 }

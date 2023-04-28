@@ -14,6 +14,9 @@ int eventHandler(PlaydateAPI* pd, PDSystemEvent event, uint32_t arg) {
         GameState* state = pd->system->realloc(NULL,sizeof(GameState));
         state->pd = pd;
         
+        // Graphics
+        initGraphics(state);
+        
         // Fonts
         state->title_font = state->pd->graphics->loadFont("fonts/BebasNeue-Regular-48", NULL);
         state->score_font = state->pd->graphics->loadFont("fonts/galvaniz-20", NULL);

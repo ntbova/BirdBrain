@@ -10,8 +10,8 @@
 
 #include "pd_api.h"
 
-#define PLAYER_HEIGHT 10
-#define PLAYER_WIDTH 50
+#define PLAYER_HEIGHT 59
+#define PLAYER_WIDTH 74
 #define BULLET_HEIGHT 5
 #define BULLET_WIDTH 5
 #define ENEMY_HEIGHT 18
@@ -25,6 +25,8 @@
 #define ENEMY_BULLET_SPEED 2
 #define MAX_HEIGHT 240
 #define MAX_WIDTH 400
+#define MIDPOINT_HEIGHT 120
+#define MIDPOINT_WIDTH 200
 #define SCREEN_MARGIN 36
 #define ENEMY_STARTING_SPEED 5
 #define ENEMY_SPEED_INCREMENT 1
@@ -58,11 +60,14 @@ typedef struct GameStates {
     LCDFont* score_font;
     PDSynth* player_fire_synth;
     PDSynth* enemy_fire_synth;
+    LCDBitmap* player_bird_bitmap;
+    LCDSprite* player_bird_sprite;
     enum GamePhases curr_phase;
     uint32_t curr_score;
     uint32_t curr_score_multiplier;
     uint8_t curr_level;
     uint8_t curr_lives;
+    float player_rot;
     int ship_pos_x;
     int ship_pos_y;
     int bullet_pos_x[BULLET_MAX];
