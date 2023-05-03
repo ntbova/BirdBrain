@@ -21,7 +21,7 @@
 #define BULLET_MAX 2
 #define ENEMY_MAX 32
 #define MAX_FRAMERATE 50
-#define PLAYER_SPEED 5.0f
+#define PLAYER_SPEED 3.0f
 #define PLAYER_CRANK_SPEED 0.5f
 #define BULLET_SPEED 5.0f
 #define ENEMY_BULLET_SPEED 2.0f
@@ -67,17 +67,21 @@ typedef struct GameStates {
     LCDBitmap* bullet_bitmap;
     LCDBitmap* bullet_bitmaps_rot[BULLET_MAX];
     LCDSprite* bullet_sprites[BULLET_MAX];
+    LCDBitmap* background_bitmap;
+    LCDSprite* background_sprite;
     enum GamePhases curr_phase;
     uint32_t curr_score;
     uint32_t curr_score_multiplier;
     uint8_t curr_level;
     uint8_t curr_lives;
     float player_rot;
+    float player_pos_x;
+    float player_pos_y;
     float bullet_pos_x[BULLET_MAX];
     float bullet_pos_y[BULLET_MAX];
     float bullet_rots[BULLET_MAX];
-    float player_rots_sin[BULLET_MAX];
-    float player_rots_cos[BULLET_MAX];
+    float bullet_rots_sin[BULLET_MAX];
+    float bullet_rots_cos[BULLET_MAX];
     int enemy_pos_x[ENEMY_MAX];
     int enemy_pos_y[ENEMY_MAX];
     int enemy_bullet_pos_x[BULLET_MAX];

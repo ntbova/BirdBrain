@@ -64,10 +64,10 @@ void shootBullets(GameState* state) {
         if (state->bullet_pos_y[i] == INT32_MIN) {
             // Set the bullet at and above where the player is
             state->bullet_rots[i] = state->player_rot;
-            state->player_rots_sin[i] = -sinf(state->bullet_rots[i] * DEGS_TO_RADS);
-            state->player_rots_cos[i] = cosf(state->bullet_rots[i] * DEGS_TO_RADS);
-            state->bullet_pos_x[i] = MIDPOINT_WIDTH + (((PLAYER_WIDTH / 2.0f) * BULLET_SPEED *  state->player_rots_sin[i]) / TRIG_MAX);
-            state->bullet_pos_y[i] = MIDPOINT_HEIGHT + (((PLAYER_HEIGHT / 2.0f) * BULLET_SPEED *  state->player_rots_cos[i]) / TRIG_MAX);
+            state->bullet_rots_sin[i] = -sinf(state->bullet_rots[i] * DEGS_TO_RADS);
+            state->bullet_rots_cos[i] = cosf(state->bullet_rots[i] * DEGS_TO_RADS);
+            state->bullet_pos_x[i] = MIDPOINT_WIDTH + (((PLAYER_WIDTH / 2.0f) * BULLET_SPEED *  state->bullet_rots_sin[i]) / TRIG_MAX);
+            state->bullet_pos_y[i] = MIDPOINT_HEIGHT + (((PLAYER_HEIGHT / 2.0f) * BULLET_SPEED *  state->bullet_rots_cos[i]) / TRIG_MAX);
             // After firing bullet, play play firing sound effect with corrresponding synth
             state->pd->sound->synth->playNote(state->player_fire_synth, 220, 1, 0.1, 0);
             // Break out of the loop (only shoot one bullet at a time)

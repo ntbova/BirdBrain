@@ -41,7 +41,9 @@ void initSound(GameState* state) {
 void initGraphics(GameState* state) {
     state->player_bird_bitmap = loadBitmapFromPath(state->pd, "images/plane1");
     state->bullet_bitmap = loadBitmapFromPath(state->pd, "images/bullet");
+    state->background_bitmap = loadBitmapFromPath(state->pd, "images/checkered");
     state->player_bird_sprite = loadSpriteFromBitmap(state->pd, state->player_bird_bitmap, kBitmapUnflipped);
+    state->background_sprite = loadSpriteFromBitmap(state->pd, state->background_bitmap, kBitmapUnflipped);
 //    state->bullet_sprites = loadSpriteFromBitmap(state->pd, state->bullet_bitmap, kBitmapUnflipped);
     for (int i = 0; i < BULLET_MAX; i++) {
         state->bullet_sprites[i] = NULL;
@@ -93,8 +95,8 @@ void initGameRunning(GameState* state) {
     state->curr_score_multiplier = SCORE_STARTING_MULTIPLIER;
     state->enemy_speed_x = ENEMY_STARTING_SPEED; state->enemy_speed_y = ENEMY_STARTING_SPEED;
     
+    state->pd->sprite->addSprite(state->background_sprite);
     state->pd->sprite->addSprite(state->player_bird_sprite);
-    state->pd->sprite->addSprite(state->bullet_sprites);
     
     resetPlayerPosition(state);
     
