@@ -4,6 +4,7 @@
 //
 //  Created by Nick Bova on 4/26/23.
 //
+#include <math.h>
 
 #include "physics.h"
 #include "inits.h"
@@ -62,8 +63,11 @@ void shootBullets(GameState* state) {
     for (int i = 0; i < BULLET_MAX; i++) {
         if (state->bullet_pos_y[i] == INT32_MIN) {
             // Set the bullet at and above where the player is
-            state->bullet_pos_x[i] = state->ship_pos_x + (PLAYER_WIDTH / 2);
-            state->bullet_pos_y[i] = state->ship_pos_y - BULLET_HEIGHT;
+            state->bullet_rots[i] = state->player_rot;
+            state->player_rots_sin[i] = -sinf(state->bullet_rots[i] * DEGS_TO_RADS);
+            state->player_rots_cos[i] = cosf(state->bullet_rots[i] * DEGS_TO_RADS);
+            state->bullet_pos_x[i] = MIDPOINT_WIDTH + (((PLAYER_WIDTH / 2.0f) * BULLET_SPEED *  state->player_rots_sin[i]) / TRIG_MAX);
+            state->bullet_pos_y[i] = MIDPOINT_HEIGHT + (((PLAYER_HEIGHT / 2.0f) * BULLET_SPEED *  state->player_rots_cos[i]) / TRIG_MAX);
             // After firing bullet, play play firing sound effect with corrresponding synth
             state->pd->sound->synth->playNote(state->player_fire_synth, 220, 1, 0.1, 0);
             // Break out of the loop (only shoot one bullet at a time)
@@ -73,12 +77,13 @@ void shootBullets(GameState* state) {
 }
 
 void moveAssets(GameState* state) {
-    // Go through each bullet currently on the screen, decrease y-axis value.
+    // Go through each bullet currently on the screen, move based on rotational value.
     // Once the bullet leaves the boundries of the screen, reset its positional
     // value to INT32_MIN
     for (int i = 0; i < BULLET_MAX; i++) {
         if (state->bullet_pos_y[i] != INT32_MIN) {
-            state->bullet_pos_y[i] -= BULLET_SPEED;
+            
+//            state->bullet_pos_y[i] -= BULLET_SPEED;
             // After moving bullet, check to see if it collides with any of the enemies.
             // Remove them both in this case.
             PDRect bullet, enemy;
@@ -97,7 +102,8 @@ void moveAssets(GameState* state) {
                 }
             }
         }
-        if (state->bullet_pos_y[i] < 0) {
+        if (state->bullet_pos_y[i] < 0 || state->bullet_pos_y[i] > MAX_HEIGHT ||
+            state->bullet_pos_x[i] < 0 || state->bullet_pos_x[i] > MAX_WIDTH ) {
             state->bullet_pos_x[i] = INT32_MIN; state->bullet_pos_y[i] = INT32_MIN;
         }
         // Do the same for enemy bullets
@@ -112,7 +118,6 @@ void moveAssets(GameState* state) {
                 PDRect bullet, player;
                 bullet.x = state->enemy_bullet_pos_x[i]; bullet.y = state->enemy_bullet_pos_y[i];
                 bullet.width = BULLET_WIDTH; bullet.height = BULLET_HEIGHT;
-                player.x = state->ship_pos_x; player.y = state->ship_pos_y;
                 player.width = PLAYER_WIDTH; player.height = PLAYER_HEIGHT;
                 if (check_collision(player, bullet)) {
                     // Remove bullet after collision. Check to see if game over state has been reached

@@ -8,6 +8,7 @@
 #include "gfx.h"
 #include "consts.h"
 #include "helpers.h"
+#include "inits.h"
 
 void renderAssets(GameState* state) {
     // Don't render assets if we've switched to a game over or other phase
@@ -16,8 +17,32 @@ void renderAssets(GameState* state) {
     // Rotate the player based on current rotation value
     LCDBitmap* rotatedBird = state->pd->graphics->rotatedBitmap(state->player_bird_bitmap, state->player_rot, 1, 1, NULL);
     state->pd->sprite->setImage(state->player_bird_sprite, rotatedBird, kBitmapUnflipped);
+    
+    // Render bullets
+    for (int i = 0; i < BULLET_MAX; i++) {
+        if (state->bullet_pos_x[i] != INT32_MIN) {
+            if (state->bullet_sprites[i] == NULL) {
+                state->bullet_bitmaps_rot[i] = state->pd->graphics->rotatedBitmap(state->bullet_bitmap, state->bullet_rots[i] + 180, 1, 1, NULL);
+                state->bullet_sprites[i] = loadSpriteFromBitmap(state->pd, state->bullet_bitmaps_rot[i], kBitmapUnflipped);
+                state->pd->sprite->addSprite(state->bullet_sprites[i]);
+                state->pd->sprite->moveTo(state->bullet_sprites[i], state->bullet_pos_x[i], state->bullet_pos_y[i]);
+            }
+            state->pd->sprite->moveBy(state->bullet_sprites[i], BULLET_SPEED * state->player_rots_sin[i], BULLET_SPEED * state->player_rots_cos[i]);
+            state->pd->sprite->getPosition(state->bullet_sprites[i], &state->bullet_pos_x[i], &state->bullet_pos_y[i]);
+        }
+        else {
+            if (state->bullet_sprites[i] != NULL) {
+                state->pd->sprite->removeSprite(state->bullet_sprites[i]);
+                state->pd->sprite->freeSprite(state->bullet_sprites[i]);
+                state->pd->graphics->freeBitmap(state->bullet_bitmaps_rot[i]);
+                state->bullet_sprites[i] = NULL;
+            }
+        }
+    }
+    
     state->pd->sprite->drawSprites();
-    state->pd->system->logToConsole("%f", state->player_rot);
+    
+    // Free any images created in this block
     state->pd->graphics->freeBitmap(rotatedBird);
     
     // Render score

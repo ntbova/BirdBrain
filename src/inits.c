@@ -9,14 +9,14 @@
 #include "consts.h"
 
 
-static LCDBitmap* loadBitmapFromPath(PlaydateAPI* pd, char* path) {
+LCDBitmap* loadBitmapFromPath(PlaydateAPI* pd, char* path) {
     const char *err = NULL;
     struct LCDBitmap* bmp = pd->graphics->loadBitmap(path, &err);
     if ( err != NULL ) { pd->system->logToConsole("Error loading image: %s", err); }
     return bmp;
 }
 
-static LCDSprite* loadSpriteFromBitmap(PlaydateAPI* pd, LCDBitmap* bmp, LCDBitmapFlip flip) {
+LCDSprite* loadSpriteFromBitmap(PlaydateAPI* pd, LCDBitmap* bmp, LCDBitmapFlip flip) {
     struct LCDSprite* pathSprite = pd->sprite->newSprite();
     pd->sprite->setImage(pathSprite, bmp, flip);
     return pathSprite;
@@ -40,7 +40,12 @@ void initSound(GameState* state) {
 
 void initGraphics(GameState* state) {
     state->player_bird_bitmap = loadBitmapFromPath(state->pd, "images/plane1");
+    state->bullet_bitmap = loadBitmapFromPath(state->pd, "images/bullet");
     state->player_bird_sprite = loadSpriteFromBitmap(state->pd, state->player_bird_bitmap, kBitmapUnflipped);
+//    state->bullet_sprites = loadSpriteFromBitmap(state->pd, state->bullet_bitmap, kBitmapUnflipped);
+    for (int i = 0; i < BULLET_MAX; i++) {
+        state->bullet_sprites[i] = NULL;
+    }
 }
 
 void checkInitGameOver(GameState* state) {
@@ -89,6 +94,7 @@ void initGameRunning(GameState* state) {
     state->enemy_speed_x = ENEMY_STARTING_SPEED; state->enemy_speed_y = ENEMY_STARTING_SPEED;
     
     state->pd->sprite->addSprite(state->player_bird_sprite);
+    state->pd->sprite->addSprite(state->bullet_sprites);
     
     resetPlayerPosition(state);
     
