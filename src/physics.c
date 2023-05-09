@@ -57,15 +57,15 @@ void shootEnemyBullets(GameState* state, int bulletPosX, int bulletPosY) {
     }
 }
 
-void shootBullets(GameState* state) {
+void shootBullets(GameState* state, float playerRotSin, float playerRotCos) {
     // Only shoot bullets if we haven't reached the max. Will do this by simply
     // checking to see if any bullets are set to INT32_MIN
     for (int i = 0; i < BULLET_MAX; i++) {
         if (state->bullet_pos_y[i] == INT32_MIN) {
             // Set the bullet at and above where the player is
             state->bullet_rots[i] = state->player_rot;
-            state->bullet_rots_sin[i] = -sinf(state->bullet_rots[i] * DEGS_TO_RADS);
-            state->bullet_rots_cos[i] = cosf(state->bullet_rots[i] * DEGS_TO_RADS);
+            state->bullet_rots_sin[i] = playerRotSin;
+            state->bullet_rots_cos[i] = playerRotCos;
             state->bullet_pos_x[i] = MIDPOINT_WIDTH + (((PLAYER_WIDTH / 2.0f) * BULLET_SPEED *  state->bullet_rots_sin[i]) / TRIG_MAX);
             state->bullet_pos_y[i] = MIDPOINT_HEIGHT + (((PLAYER_HEIGHT / 2.0f) * BULLET_SPEED *  state->bullet_rots_cos[i]) / TRIG_MAX);
             // After firing bullet, play play firing sound effect with corrresponding synth
@@ -77,6 +77,16 @@ void shootBullets(GameState* state) {
 }
 
 void moveAssets(GameState* state) {
+    // Move player
+    float player_rot_sin = sinf(state->player_rot * DEGS_TO_RADS);
+    float player_rot_cos = -cosf(state->player_rot * DEGS_TO_RADS);
+    
+    state->player_pos_x = state->player_pos_x + (PLAYER_SPEED * player_rot_sin);
+    state->player_pos_y = state->player_pos_y + (PLAYER_SPEED * player_rot_cos);
+    
+    // Check if player has fired any shots, call shootBullets if true
+    if (state->player_fired_shot) { shootBullets(state, -player_rot_sin, -player_rot_cos); }
+    
     // Go through each bullet currently on the screen, move based on rotational value.
     // Once the bullet leaves the boundries of the screen, reset its positional
     // value to INT32_MIN
@@ -140,54 +150,5 @@ void moveAssets(GameState* state) {
         incrementLevel(state);
     }
     else {
-        // If enough time has passed (ENEMY_MOVEMENT_FREQ), go through and move each
-        // enemy still active
-        int currTime = state->pd->system->getCurrentTimeMilliseconds();
-        int allowEnemyFire = 0;
-        // If enough time has passed (ENEMY_FIRING_INTERVAL), set flag to allow enemies to fire
-        if (currTime - state->enemy_fire_time > ENEMY_FIRING_INTERVAL) {
-            allowEnemyFire = 1;
-        }
-        if (currTime - state->enemy_move_time > ENEMY_MOVEMENT_FREQ - (ENEMY_MOVEMENT_FREQ_OFFSET * (ENEMY_MAX - curr_num_enemies))) {
-            int speedFlipped = 0;
-            // Perform initial check to see if any enemies have reached the left/right edges of the screen.
-            // Use that to determine which direction to move them in this cycle
-            for (int i = 0; i < ENEMY_MAX; i++) {
-                if (state->enemy_pos_y[i] != INT32_MIN) {
-                    if (!speedFlipped && (state->enemy_pos_x[i] + state->enemy_speed_x >= MAX_WIDTH - ENEMY_SCREEN_WIDTH_MARGIN - ENEMY_WIDTH
-                        || state->enemy_pos_x[i] + state->enemy_speed_x <= ENEMY_SCREEN_WIDTH_MARGIN + ENEMY_WIDTH)) {
-                        state->enemy_speed_x = -state->enemy_speed_x; speedFlipped = 1;
-                        break;
-                    }
-                }
-            }
-            
-            for (int i = 0; i < ENEMY_MAX; i++) {
-                if (state->enemy_pos_y[i] != INT32_MIN) {
-                    if (speedFlipped) {
-                        state->enemy_pos_y[i] += state->enemy_speed_y;
-                    }
-                    else {
-                        state->enemy_pos_x[i] += state->enemy_speed_x;
-                    }
-                    // If enemy reaches the bottom of the screen, set the game
-                    // into a game over phase
-                    if (state->enemy_pos_y[i] >= MAX_HEIGHT - PLAYER_HEIGHT - 15) {
-                        checkInitGameOver(state); break;
-                    }
-                    // If we are allowing an enemy to fire, use a random number generated here to determine
-                    // if the current enemy should fire. Only do this once per firing cycle.
-                    if (allowEnemyFire) {
-                        int fireNow = (rand() % 20) > 18;
-                        if (fireNow) {
-                            shootEnemyBullets(state, state->enemy_pos_x[i], state->enemy_pos_y[i]);
-                            allowEnemyFire = 0;
-                        }
-                    }
-                }
-            }
-            // Reset enemy move time
-            state->enemy_move_time = currTime;
-        }
     }
 }

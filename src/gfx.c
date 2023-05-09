@@ -14,15 +14,15 @@ void renderAssets(GameState* state) {
     // Don't render assets if we've switched to a game over or other phase
     if (state->curr_phase != pGameRunning) { return; }
     
-    // Render Background
-//    state->pd->sprite->moveTo(state->background_sprite, state->player_pos_x, state->player_pos_y);
-    
     // Rotate the player based on current rotation value
     LCDBitmap* rotatedBird = state->pd->graphics->rotatedBitmap(state->player_bird_bitmap, state->player_rot, 1, 1, NULL);
     state->pd->sprite->setImage(state->player_bird_sprite, rotatedBird, kBitmapUnflipped);
     
-    // Move player based on current angle
-    state->pd->sprite->moveBy(state->background_sprite, PLAYER_SPEED * sinf(state->player_rot * DEGS_TO_RADS), PLAYER_SPEED * -cosf(state->player_rot * DEGS_TO_RADS));
+    // Move background based on player position
+    state->pd->sprite->moveTo(state->background_sprite, state->player_pos_x, state->player_pos_y);
+//    PDRect rect = state->pd->sprite->getBounds(state->background_sprite);
+//    state->pd->system->logToConsole("%f x %f - %f x %f", rect.x, rect.y, rect.width, rect.height);
+//    state->pd->system->logToConsole("%f x %f", state->player_pos_x, state->player_pos_y);
     
     // Render bullets
     for (int i = 0; i < BULLET_MAX; i++) {

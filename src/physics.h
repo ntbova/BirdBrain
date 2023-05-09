@@ -15,7 +15,7 @@
 void incrementLevel(GameState* state);
 int check_collision(PDRect a, PDRect b);
 void shootEnemyBullets(GameState* state, int bulletPosX, int bulletPosY);
-void shootBullets(GameState* state);
+void shootBullets(GameState* state, float playerRotSin, float playerRotCos);
 void moveAssets(GameState* state);
 
 #endif /* physics_h */

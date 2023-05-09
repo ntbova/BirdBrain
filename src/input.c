@@ -8,7 +8,6 @@
 #include "input.h"
 #include "consts.h"
 #include "pd_api.h"
-#include "physics.h"
 
 void checkButtons(GameState* state) {
     PDButtons current;
@@ -23,7 +22,8 @@ void checkButtons(GameState* state) {
         state->player_rot -= PLAYER_SPEED;
     }
     
-    if (pushed & kButtonA || pushed & kButtonB || pushed & kButtonUp) { shootBullets(state); }
+    if (pushed & kButtonA || pushed & kButtonB || pushed & kButtonUp) { state->player_fired_shot = 1; }
+    else { state->player_fired_shot = 0; }
 }
 
 void checkCrank(GameState* state) {

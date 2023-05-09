@@ -14,6 +14,8 @@
 #define TRIG_MAX 5.0f
 #define PLAYER_HEIGHT 59.0f
 #define PLAYER_WIDTH 74.0f
+#define BG_MIDPOINT_HEIGHT 252.0f
+#define BG_MIDPOINT_WIDTH 450.0f
 #define BULLET_HEIGHT 5.0f
 #define BULLET_WIDTH 5.0f
 #define ENEMY_HEIGHT 18.0f
@@ -77,6 +79,7 @@ typedef struct GameStates {
     float player_rot;
     float player_pos_x;
     float player_pos_y;
+    uint8_t player_fired_shot;
     float bullet_pos_x[BULLET_MAX];
     float bullet_pos_y[BULLET_MAX];
     float bullet_rots[BULLET_MAX];

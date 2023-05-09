@@ -83,6 +83,7 @@ void resetEnemyPosition(GameState* state) {
 
 void resetPlayerPosition(GameState* state) {
     state->pd->sprite->moveTo(state->player_bird_sprite, MIDPOINT_WIDTH, MIDPOINT_HEIGHT);
+    state->pd->sprite->moveTo(state->background_sprite, BG_MIDPOINT_WIDTH - MAX_WIDTH, BG_MIDPOINT_HEIGHT - MAX_HEIGHT);
     state->player_rot = 0;
 }
 
@@ -93,6 +94,7 @@ void initGameRunning(GameState* state) {
     state->curr_score = 0;
     state->curr_lives = STARTING_LIVES;
     state->curr_score_multiplier = SCORE_STARTING_MULTIPLIER;
+    state->player_fired_shot = 0;
     state->enemy_speed_x = ENEMY_STARTING_SPEED; state->enemy_speed_y = ENEMY_STARTING_SPEED;
     
     state->pd->sprite->addSprite(state->background_sprite);
