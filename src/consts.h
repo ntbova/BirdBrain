@@ -92,8 +92,8 @@ typedef struct GameStates {
     float player_pos_x_delta;
     float player_pos_y_delta;
     uint8_t player_fired_shot;
-    float bullet_pos_x[BULLET_MAX];
-    float bullet_pos_y[BULLET_MAX];
+    float bullet_screen_pos_x[BULLET_MAX];
+    float bullet_screen_pos_y[BULLET_MAX];
     float bullet_rots[BULLET_MAX];
     float bullet_rots_sin[BULLET_MAX];
     float bullet_rots_cos[BULLET_MAX];

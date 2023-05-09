@@ -34,15 +34,15 @@ void renderAssets(GameState* state) {
     state->pd->sprite->getPosition(state->player_bird_sprite, &state->player_screen_pos_x, &state->player_screen_pos_y);
     // Render bullets
     for (int i = 0; i < BULLET_MAX; i++) {
-        if (state->bullet_pos_x[i] != INT32_MIN) {
+        if (state->bullet_screen_pos_x[i] != INT32_MIN) {
             if (state->bullet_sprites[i] == NULL) {
                 state->bullet_bitmaps_rot[i] = state->pd->graphics->rotatedBitmap(state->bullet_bitmap, state->bullet_rots[i] + 180, 1, 1, NULL);
                 state->bullet_sprites[i] = loadSpriteFromBitmap(state->pd, state->bullet_bitmaps_rot[i], kBitmapUnflipped);
                 state->pd->sprite->addSprite(state->bullet_sprites[i]);
-                state->pd->sprite->moveTo(state->bullet_sprites[i], state->bullet_pos_x[i], state->bullet_pos_y[i]);
+                state->pd->sprite->moveTo(state->bullet_sprites[i], state->bullet_screen_pos_x[i], state->bullet_screen_pos_y[i]);
             }
             state->pd->sprite->moveBy(state->bullet_sprites[i], BULLET_SPEED * state->bullet_rots_sin[i], BULLET_SPEED * state->bullet_rots_cos[i]);
-            state->pd->sprite->getPosition(state->bullet_sprites[i], &state->bullet_pos_x[i], &state->bullet_pos_y[i]);
+            state->pd->sprite->getPosition(state->bullet_sprites[i], &state->bullet_screen_pos_x[i], &state->bullet_screen_pos_y[i]);
         }
         else {
             if (state->bullet_sprites[i] != NULL) {

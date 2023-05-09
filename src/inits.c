@@ -85,7 +85,7 @@ void resetPlayerPosition(GameState* state) {
     state->player_world_pos_x = 0; state->player_world_pos_y = 0;
     state->player_screen_pos_x = MIDPOINT_WIDTH; state->player_screen_pos_y = MIDPOINT_WIDTH;
     state->pd->sprite->moveTo(state->player_bird_sprite, MIDPOINT_WIDTH, MIDPOINT_HEIGHT);
-    state->pd->sprite->moveTo(state->background_sprite, BG_MIDPOINT_WIDTH - MAX_WIDTH, BG_MIDPOINT_HEIGHT - MAX_HEIGHT);
+    state->pd->sprite->moveTo(state->background_sprite, 0, 0);
     state->player_rot = 0;
 }
 
@@ -105,7 +105,7 @@ void initGameRunning(GameState* state) {
     resetPlayerPosition(state);
     
     for (int i = 0; i < BULLET_MAX; i++) {
-        state->bullet_pos_x[i] = INT32_MIN; state->bullet_pos_y[i] = INT32_MIN;
+        state->bullet_screen_pos_x[i] = INT32_MIN; state->bullet_screen_pos_y[i] = INT32_MIN;
         state->enemy_pos_x[i] = INT32_MIN; state->enemy_pos_y[i] = INT32_MIN;
         state->enemy_bullet_pos_x[i] = INT32_MIN; state->enemy_bullet_pos_y[i] = INT32_MIN;
     }

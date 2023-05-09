@@ -61,13 +61,13 @@ void shootBullets(GameState* state, float playerRotSin, float playerRotCos) {
     // Only shoot bullets if we haven't reached the max. Will do this by simply
     // checking to see if any bullets are set to INT32_MIN
     for (int i = 0; i < BULLET_MAX; i++) {
-        if (state->bullet_pos_y[i] == INT32_MIN) {
+        if (state->bullet_screen_pos_y[i] == INT32_MIN) {
             // Set the bullet at and above where the player is
             state->bullet_rots[i] = state->player_rot;
             state->bullet_rots_sin[i] = playerRotSin;
             state->bullet_rots_cos[i] = playerRotCos;
-            state->bullet_pos_x[i] = MIDPOINT_WIDTH + (((PLAYER_WIDTH / 2.0f) * BULLET_SPEED *  state->bullet_rots_sin[i]) / TRIG_MAX);
-            state->bullet_pos_y[i] = MIDPOINT_HEIGHT + (((PLAYER_HEIGHT / 2.0f) * BULLET_SPEED *  state->bullet_rots_cos[i]) / TRIG_MAX);
+            state->bullet_screen_pos_x[i] = state->player_screen_pos_x + (((PLAYER_WIDTH / 2.0f) * BULLET_SPEED *  state->bullet_rots_sin[i]) / TRIG_MAX);
+            state->bullet_screen_pos_y[i] = state->player_screen_pos_y + (((PLAYER_HEIGHT / 2.0f) * BULLET_SPEED *  state->bullet_rots_cos[i]) / TRIG_MAX);
             // After firing bullet, play play firing sound effect with corrresponding synth
             state->pd->sound->synth->playNote(state->player_fire_synth, 220, 1, 0.1, 0);
             // Break out of the loop (only shoot one bullet at a time)
@@ -99,20 +99,20 @@ void moveAssets(GameState* state) {
     // Once the bullet leaves the boundries of the screen, reset its positional
     // value to INT32_MIN
     for (int i = 0; i < BULLET_MAX; i++) {
-        if (state->bullet_pos_y[i] != INT32_MIN) {
+        if (state->bullet_screen_pos_y[i] != INT32_MIN) {
             
             //            state->bullet_pos_y[i] -= BULLET_SPEED;
             // After moving bullet, check to see if it collides with any of the enemies.
             // Remove them both in this case.
             PDRect bullet, enemy;
-            bullet.x = state->bullet_pos_x[i]; bullet.y = state->bullet_pos_y[i];
+            bullet.x = state->bullet_screen_pos_x[i]; bullet.y = state->bullet_screen_pos_y[i];
             bullet.width = BULLET_WIDTH; bullet.height = BULLET_HEIGHT;
             enemy.width = ENEMY_WIDTH; enemy.height = ENEMY_HEIGHT;
             for (int j = 0; j < ENEMY_MAX; j++) {
                 if (state->enemy_pos_y[j] != INT32_MIN) {
                     enemy.x = state->enemy_pos_x[j]; enemy.y = state->enemy_pos_y[j];
                     if (check_collision(bullet, enemy)) {
-                        state->bullet_pos_x[i] = INT32_MIN; state->bullet_pos_y[i] = INT32_MIN;
+                        state->bullet_screen_pos_x[i] = INT32_MIN; state->bullet_screen_pos_y[i] = INT32_MIN;
                         state->enemy_pos_x[j] = INT32_MIN; state->enemy_pos_y[j] = INT32_MIN;
                         // Increment score after hit
                         state->curr_score += state->curr_score_multiplier;
@@ -120,9 +120,9 @@ void moveAssets(GameState* state) {
                 }
             }
         }
-        if (state->bullet_pos_y[i] < 0 || state->bullet_pos_y[i] > MAX_HEIGHT ||
-            state->bullet_pos_x[i] < 0 || state->bullet_pos_x[i] > MAX_WIDTH ) {
-            state->bullet_pos_x[i] = INT32_MIN; state->bullet_pos_y[i] = INT32_MIN;
+        if (state->bullet_screen_pos_y[i] < 0 || state->bullet_screen_pos_y[i] > MAX_HEIGHT ||
+            state->bullet_screen_pos_x[i] < 0 || state->bullet_screen_pos_x[i] > MAX_WIDTH ) {
+            state->bullet_screen_pos_x[i] = INT32_MIN; state->bullet_screen_pos_y[i] = INT32_MIN;
         }
         // Do the same for enemy bullets
         if (state->enemy_bullet_pos_y[i] != INT32_MIN) {
