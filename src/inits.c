@@ -82,6 +82,8 @@ void resetEnemyPosition(GameState* state) {
 }
 
 void resetPlayerPosition(GameState* state) {
+    state->player_world_pos_x = 0; state->player_world_pos_y = 0;
+    state->player_screen_pos_x = MIDPOINT_WIDTH; state->player_screen_pos_y = MIDPOINT_WIDTH;
     state->pd->sprite->moveTo(state->player_bird_sprite, MIDPOINT_WIDTH, MIDPOINT_HEIGHT);
     state->pd->sprite->moveTo(state->background_sprite, BG_MIDPOINT_WIDTH - MAX_WIDTH, BG_MIDPOINT_HEIGHT - MAX_HEIGHT);
     state->player_rot = 0;

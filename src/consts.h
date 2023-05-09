@@ -16,6 +16,14 @@
 #define PLAYER_WIDTH 74.0f
 #define BG_MIDPOINT_HEIGHT 252.0f
 #define BG_MIDPOINT_WIDTH 450.0f
+#define BG_MARGIN_LEFT 750.0f
+#define BG_MARGIN_RIGHT -400.0f
+#define BG_MAX_LEFT 950.0f
+#define BG_MAX_RIGHT -600.0f
+#define BG_MARGIN_TOP 450.0f
+#define BG_MARGIN_BOTTOM -260.0f
+#define BG_MAX_TOP 575.0f
+#define BG_MAX_BOTTOM -375.0f
 #define BULLET_HEIGHT 5.0f
 #define BULLET_WIDTH 5.0f
 #define ENEMY_HEIGHT 18.0f
@@ -77,8 +85,12 @@ typedef struct GameStates {
     uint8_t curr_level;
     uint8_t curr_lives;
     float player_rot;
-    float player_pos_x;
-    float player_pos_y;
+    float player_world_pos_x;
+    float player_world_pos_y;
+    float player_screen_pos_x;
+    float player_screen_pos_y;
+    float player_pos_x_delta;
+    float player_pos_y_delta;
     uint8_t player_fired_shot;
     float bullet_pos_x[BULLET_MAX];
     float bullet_pos_y[BULLET_MAX];

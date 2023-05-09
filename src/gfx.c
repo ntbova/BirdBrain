@@ -18,12 +18,20 @@ void renderAssets(GameState* state) {
     LCDBitmap* rotatedBird = state->pd->graphics->rotatedBitmap(state->player_bird_bitmap, state->player_rot, 1, 1, NULL);
     state->pd->sprite->setImage(state->player_bird_sprite, rotatedBird, kBitmapUnflipped);
     
-    // Move background based on player position
-    state->pd->sprite->moveTo(state->background_sprite, state->player_pos_x, state->player_pos_y);
-//    PDRect rect = state->pd->sprite->getBounds(state->background_sprite);
-//    state->pd->system->logToConsole("%f x %f - %f x %f", rect.x, rect.y, rect.width, rect.height);
-//    state->pd->system->logToConsole("%f x %f", state->player_pos_x, state->player_pos_y);
+    // Move background or player based on player position
+    float playerGfxDeltaX = 0.0f; float playerGfxDeltaY = 0.0f;
+    float bgGfxDeltaX = 0.0f; float bgGfxDeltaY = 0.0f;
     
+    if (state->player_world_pos_x <= BG_MARGIN_RIGHT || state->player_world_pos_x >= BG_MARGIN_LEFT) { playerGfxDeltaX = -state->player_pos_x_delta; }
+    else { bgGfxDeltaX = state->player_pos_x_delta; }
+    
+    if (state->player_world_pos_y >= BG_MARGIN_TOP || state->player_world_pos_y <= BG_MARGIN_BOTTOM) { playerGfxDeltaY = -state->player_pos_y_delta; }
+    else { bgGfxDeltaY = state->player_pos_y_delta; }
+    
+    state->pd->sprite->moveBy(state->background_sprite, bgGfxDeltaX, bgGfxDeltaY);
+    state->pd->sprite->moveBy(state->player_bird_sprite, playerGfxDeltaX, playerGfxDeltaY);
+    
+    state->pd->sprite->getPosition(state->player_bird_sprite, &state->player_screen_pos_x, &state->player_screen_pos_y);
     // Render bullets
     for (int i = 0; i < BULLET_MAX; i++) {
         if (state->bullet_pos_x[i] != INT32_MIN) {
