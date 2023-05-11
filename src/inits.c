@@ -68,16 +68,17 @@ void checkInitGameOver(GameState* state) {
 }
 
 void resetEnemyPosition(GameState* state) {
-    int currEnemyPosX = SCREEN_MARGIN; int currEnemyPosY = SCREEN_MARGIN;
-    state->enemy_pos_x[0] = currEnemyPosX; state->enemy_pos_y[0] = currEnemyPosY;
+    int currEnemyPosX = BG_MARGIN_LEFT - ENEMY_MARGIN_WIDTH; int currEnemyPosY = BG_MARGIN_TOP - ENEMY_MARGIN_HEIGHT;
+    state->enemy_world_pos_x[0] = currEnemyPosX; state->enemy_world_pos_y[0] = currEnemyPosY;
     for (int i = 1; i < ENEMY_MAX; i++) {
         // For layout of enemies on screen, start from the top of the screen with a certain margin,
         // if we reach the end of the screen, then reset the x position and start a new row
-        currEnemyPosX += ENEMY_MARGIN_WIDTH + ENEMY_WIDTH;
-        if (currEnemyPosX >= MAX_WIDTH - SCREEN_MARGIN) {
-            currEnemyPosX = SCREEN_MARGIN; currEnemyPosY += ENEMY_MARGIN_HEIGHT + ENEMY_HEIGHT;
+        currEnemyPosX -= BG_SECTION_WIDTH;
+        if (currEnemyPosX <= BG_MARGIN_RIGHT) {
+            currEnemyPosX = BG_SECTION_WIDTH - ENEMY_WIDTH; currEnemyPosY -= BG_SECTION_HEIGHT - ENEMY_HEIGHT;
         }
-        state->enemy_pos_x[i] = currEnemyPosX; state->enemy_pos_y[i] = currEnemyPosY;
+        state->enemy_world_pos_x[i] = currEnemyPosX; state->enemy_world_pos_y[i] = currEnemyPosY;
+        state->enemy_screen_pos_x[i] = currEnemyPosX; state->enemy_screen_pos_y[i] = currEnemyPosY;
     }
 }
 
@@ -106,7 +107,8 @@ void initGameRunning(GameState* state) {
     
     for (int i = 0; i < BULLET_MAX; i++) {
         state->bullet_screen_pos_x[i] = INT32_MIN; state->bullet_screen_pos_y[i] = INT32_MIN;
-        state->enemy_pos_x[i] = INT32_MIN; state->enemy_pos_y[i] = INT32_MIN;
+        state->enemy_world_pos_x[i] = INT32_MIN; state->enemy_world_pos_y[i] = INT32_MIN;
+        state->enemy_screen_pos_x[i] = INT32_MIN; state->enemy_screen_pos_y[i] = INT32_MIN;
         state->enemy_bullet_pos_x[i] = INT32_MIN; state->enemy_bullet_pos_y[i] = INT32_MIN;
     }
     

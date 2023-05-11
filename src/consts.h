@@ -24,12 +24,14 @@
 #define BG_MARGIN_BOTTOM -260.0f
 #define BG_MAX_TOP 575.0f
 #define BG_MAX_BOTTOM -375.0f
+#define BG_SECTION_WIDTH 310.0f
+#define BG_SECTION_HEIGHT 177.5f
 #define BULLET_HEIGHT 5.0f
 #define BULLET_WIDTH 5.0f
 #define ENEMY_HEIGHT 18.0f
 #define ENEMY_WIDTH 18.0f
 #define BULLET_MAX 2
-#define ENEMY_MAX 32
+#define ENEMY_MAX 16
 #define MAX_FRAMERATE 50
 #define PLAYER_SPEED 3.0f
 #define PLAYER_CRANK_SPEED 0.5f
@@ -42,9 +44,9 @@
 #define SCREEN_MARGIN 36.0f
 #define ENEMY_STARTING_SPEED 5.0f
 #define ENEMY_SPEED_INCREMENT 1.0f
-#define ENEMY_MARGIN_WIDTH 24.0f
+#define ENEMY_MARGIN_WIDTH 30.0f
 #define ENEMY_SCREEN_WIDTH_MARGIN 10.0f
-#define ENEMY_MARGIN_HEIGHT 5.0f
+#define ENEMY_MARGIN_HEIGHT 30.0f
 #define ENEMY_MOVEMENT_FREQ 1000.0f // ms
 #define ENEMY_MOVEMENT_FREQ_OFFSET 32.0f
 #define ENEMY_FIRING_INTERVAL 3000.0f // ms
@@ -97,8 +99,10 @@ typedef struct GameStates {
     float bullet_rots[BULLET_MAX];
     float bullet_rots_sin[BULLET_MAX];
     float bullet_rots_cos[BULLET_MAX];
-    int enemy_pos_x[ENEMY_MAX];
-    int enemy_pos_y[ENEMY_MAX];
+    float enemy_world_pos_x[ENEMY_MAX];
+    float enemy_world_pos_y[ENEMY_MAX];
+    float enemy_screen_pos_x[ENEMY_MAX];
+    float enemy_screen_pos_y[ENEMY_MAX];
     int enemy_bullet_pos_x[BULLET_MAX];
     int enemy_bullet_pos_y[BULLET_MAX];
     int enemy_speed_x;

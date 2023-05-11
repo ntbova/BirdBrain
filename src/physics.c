@@ -100,8 +100,6 @@ void moveAssets(GameState* state) {
     // value to INT32_MIN
     for (int i = 0; i < BULLET_MAX; i++) {
         if (state->bullet_screen_pos_y[i] != INT32_MIN) {
-            
-            //            state->bullet_pos_y[i] -= BULLET_SPEED;
             // After moving bullet, check to see if it collides with any of the enemies.
             // Remove them both in this case.
             PDRect bullet, enemy;
@@ -109,11 +107,12 @@ void moveAssets(GameState* state) {
             bullet.width = BULLET_WIDTH; bullet.height = BULLET_HEIGHT;
             enemy.width = ENEMY_WIDTH; enemy.height = ENEMY_HEIGHT;
             for (int j = 0; j < ENEMY_MAX; j++) {
-                if (state->enemy_pos_y[j] != INT32_MIN) {
-                    enemy.x = state->enemy_pos_x[j]; enemy.y = state->enemy_pos_y[j];
+                if (state->enemy_screen_pos_y[j] != INT32_MIN) {
+                    enemy.x = state->enemy_screen_pos_x[j]; enemy.y = state->enemy_screen_pos_y[j];
                     if (check_collision(bullet, enemy)) {
                         state->bullet_screen_pos_x[i] = INT32_MIN; state->bullet_screen_pos_y[i] = INT32_MIN;
-                        state->enemy_pos_x[j] = INT32_MIN; state->enemy_pos_y[j] = INT32_MIN;
+                        state->enemy_screen_pos_x[j] = INT32_MIN; state->enemy_screen_pos_y[j] = INT32_MIN;
+                        state->enemy_world_pos_x[j] = INT32_MIN; state->enemy_world_pos_y[j] = INT32_MIN;
                         // Increment score after hit
                         state->curr_score += state->curr_score_multiplier;
                     }
@@ -149,7 +148,7 @@ void moveAssets(GameState* state) {
     // Keep track of the number of enemies still onscreen.
     int curr_num_enemies = 0;
     for (int i = 0; i < ENEMY_MAX; i++) {
-        if (state->enemy_pos_y[i] != INT32_MIN) {
+        if (state->enemy_world_pos_y[i] != INT32_MIN) {
             curr_num_enemies += 1;
         }
     }
