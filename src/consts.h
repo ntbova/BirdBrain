@@ -16,14 +16,14 @@
 #define PLAYER_WIDTH 74.0f
 #define BG_MIDPOINT_HEIGHT 252.0f
 #define BG_MIDPOINT_WIDTH 450.0f
-#define BG_MARGIN_LEFT 750.0f
-#define BG_MARGIN_RIGHT -400.0f
-#define BG_MAX_LEFT 950.0f
-#define BG_MAX_RIGHT -600.0f
-#define BG_MARGIN_TOP 450.0f
-#define BG_MARGIN_BOTTOM -260.0f
-#define BG_MAX_TOP 575.0f
-#define BG_MAX_BOTTOM -375.0f
+#define BG_MARGIN_LEFT -750.0f
+#define BG_MARGIN_RIGHT 400.0f
+#define BG_MAX_LEFT -950.0f
+#define BG_MAX_RIGHT 600.0f
+#define BG_MARGIN_TOP -450.0f
+#define BG_MARGIN_BOTTOM 260.0f
+#define BG_MAX_TOP -575.0f
+#define BG_MAX_BOTTOM 375.0f
 #define BG_SECTION_WIDTH 310.0f
 #define BG_SECTION_HEIGHT 177.5f
 #define BULLET_HEIGHT 5.0f
@@ -86,6 +86,10 @@ typedef struct GameStates {
     uint32_t curr_score_multiplier;
     uint8_t curr_level;
     uint8_t curr_lives;
+    float screen_world_pos_left;
+    float screen_world_pos_right;
+    float screen_world_pos_top;
+    float screen_world_pos_bottom;
     float player_rot;
     float player_world_pos_x;
     float player_world_pos_y;

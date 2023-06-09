@@ -78,13 +78,15 @@ void resetEnemyPosition(GameState* state) {
             currEnemyPosX = BG_SECTION_WIDTH - ENEMY_WIDTH; currEnemyPosY -= BG_SECTION_HEIGHT - ENEMY_HEIGHT;
         }
         state->enemy_world_pos_x[i] = currEnemyPosX; state->enemy_world_pos_y[i] = currEnemyPosY;
-        state->enemy_screen_pos_x[i] = currEnemyPosX; state->enemy_screen_pos_y[i] = currEnemyPosY;
+        state->enemy_screen_pos_x[i] = INT32_MIN; state->enemy_screen_pos_y[i] = INT32_MIN;
     }
 }
 
 void resetPlayerPosition(GameState* state) {
     state->player_world_pos_x = 0; state->player_world_pos_y = 0;
-    state->player_screen_pos_x = MIDPOINT_WIDTH; state->player_screen_pos_y = MIDPOINT_WIDTH;
+    state->player_screen_pos_x = MIDPOINT_WIDTH; state->player_screen_pos_y = MIDPOINT_HEIGHT;
+    state->screen_world_pos_left = -MIDPOINT_WIDTH; state->screen_world_pos_right = MIDPOINT_WIDTH;
+    state->screen_world_pos_top = MIDPOINT_HEIGHT; state->screen_world_pos_bottom = -MIDPOINT_HEIGHT;
     state->pd->sprite->moveTo(state->player_bird_sprite, MIDPOINT_WIDTH, MIDPOINT_HEIGHT);
     state->pd->sprite->moveTo(state->background_sprite, 0, 0);
     state->player_rot = 0;

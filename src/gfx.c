@@ -22,11 +22,13 @@ void renderAssets(GameState* state) {
     float playerGfxDeltaX = 0.0f; float playerGfxDeltaY = 0.0f;
     float bgGfxDeltaX = 0.0f; float bgGfxDeltaY = 0.0f;
     
-    if (state->player_world_pos_x <= BG_MARGIN_RIGHT || state->player_world_pos_x >= BG_MARGIN_LEFT) { playerGfxDeltaX = -state->player_pos_x_delta; }
-    else { bgGfxDeltaX = state->player_pos_x_delta; }
+    if (state->player_world_pos_x >= BG_MARGIN_RIGHT || state->player_world_pos_x <= BG_MARGIN_LEFT) { playerGfxDeltaX = -state->player_pos_x_delta; }
+    else { bgGfxDeltaX = state->player_pos_x_delta; state->screen_world_pos_left -= state->player_pos_x_delta; state->screen_world_pos_right -= state->player_pos_x_delta; }
     
-    if (state->player_world_pos_y >= BG_MARGIN_TOP || state->player_world_pos_y <= BG_MARGIN_BOTTOM) { playerGfxDeltaY = -state->player_pos_y_delta; }
-    else { bgGfxDeltaY = state->player_pos_y_delta; }
+    if (state->player_world_pos_y <= BG_MARGIN_TOP || state->player_world_pos_y >= BG_MARGIN_BOTTOM) { playerGfxDeltaY = -state->player_pos_y_delta; }
+    else { bgGfxDeltaY = state->player_pos_y_delta; state->screen_world_pos_top += state->player_pos_y_delta; state->screen_world_pos_bottom += state->player_pos_y_delta;  }
+    
+    state->pd->system->logToConsole("x: %f - y: %f", state->player_screen_pos_x, state->player_screen_pos_y);
     
     state->pd->sprite->moveBy(state->background_sprite, bgGfxDeltaX, bgGfxDeltaY);
     state->pd->sprite->moveBy(state->player_bird_sprite, playerGfxDeltaX, playerGfxDeltaY);

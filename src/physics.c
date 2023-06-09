@@ -83,14 +83,14 @@ void moveAssets(GameState* state) {
     
     state->player_pos_x_delta = PLAYER_SPEED * player_rot_sin;
     state->player_pos_y_delta = PLAYER_SPEED * player_rot_cos;
-    state->player_world_pos_x = state->player_world_pos_x + state->player_pos_x_delta;
-    state->player_world_pos_y = state->player_world_pos_y + state->player_pos_y_delta;
+    state->player_world_pos_x = state->player_world_pos_x - state->player_pos_x_delta;
+    state->player_world_pos_y = state->player_world_pos_y - state->player_pos_y_delta;
     
-    if (state->player_world_pos_x >= BG_MAX_LEFT) { state->player_world_pos_x = BG_MAX_LEFT; state->player_pos_x_delta = 0; }
-    else if (state->player_world_pos_x <= BG_MAX_RIGHT) { state->player_world_pos_x = BG_MAX_RIGHT; state->player_pos_x_delta = 0; }
+    if (state->player_world_pos_x <= BG_MAX_LEFT) { state->player_world_pos_x = BG_MAX_LEFT; state->player_pos_x_delta = 0; }
+    else if (state->player_world_pos_x >= BG_MAX_RIGHT) { state->player_world_pos_x = BG_MAX_RIGHT; state->player_pos_x_delta = 0; }
     
-    if (state->player_world_pos_y >= BG_MAX_TOP) { state->player_world_pos_y = BG_MAX_TOP; state->player_pos_y_delta = 0; }
-    else if (state->player_world_pos_y <= BG_MAX_BOTTOM) { state->player_world_pos_y = BG_MAX_BOTTOM; state->player_pos_y_delta = 0; }
+    if (state->player_world_pos_y <= BG_MAX_TOP) { state->player_world_pos_y = BG_MAX_TOP; state->player_pos_y_delta = 0; }
+    else if (state->player_world_pos_y >= BG_MAX_BOTTOM) { state->player_world_pos_y = BG_MAX_BOTTOM; state->player_pos_y_delta = 0; }
 
     // Check if player has fired any shots, call shootBullets if true
     if (state->player_fired_shot) { shootBullets(state, -player_rot_sin, -player_rot_cos); }
