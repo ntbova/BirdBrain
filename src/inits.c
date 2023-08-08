@@ -22,6 +22,19 @@ LCDSprite* loadSpriteFromBitmap(PlaydateAPI* pd, LCDBitmap* bmp, LCDBitmapFlip f
     return pathSprite;
 }
 
+void initEntities(GameState* state) {
+    state->player_bird = state->pd->system->realloc(NULL,sizeof(Entity));
+    
+    for (int i = 0; i < ENEMY_MAX; i++) {
+        state->enemy_birds[i] = state->pd->system->realloc(NULL,sizeof(Entity));
+    }
+    
+    for (int i = 0; i < BULLET_MAX; i++) {
+        state->player_bullets[i] = state->pd->system->realloc(NULL,sizeof(Entity));
+        state->enemy_bullets[i] = state->pd->system->realloc(NULL,sizeof(Entity));
+    }
+}
+
 void initSound(GameState* state) {
     state->player_fire_synth = state->pd->sound->synth->newSynth();
     state->pd->sound->synth->setWaveform(state->player_fire_synth, kWaveformTriangle);
@@ -39,14 +52,28 @@ void initSound(GameState* state) {
 }
 
 void initGraphics(GameState* state) {
-    state->player_bird_bitmap = loadBitmapFromPath(state->pd, "images/plane1");
-    state->bullet_bitmap = loadBitmapFromPath(state->pd, "images/bullet");
-    state->background_bitmap = loadBitmapFromPath(state->pd, "images/checkered");
-    state->player_bird_sprite = loadSpriteFromBitmap(state->pd, state->player_bird_bitmap, kBitmapUnflipped);
+    state->player_bird->e_bitmap = loadBitmapFromPath(state->pd, "images/plane1");
+    
+    LCDBitmap* bullet = loadBitmapFromPath(state->pd, "images/bullet");
+    for (int i = 0; i < BULLET_MAX; i++) {
+        state->player_bullets[i]->e_bitmap = bullet;
+    }
+    
+    state->background_bitmap = loadBitmapFromPath(state->pd, BG_TESTING_BITMAP);
+    
+    LCDBitmap* enemy = loadBitmapFromPath(state->pd, "images/enemy");
+    for (int i = 0; i < ENEMY_MAX; i++) {
+        state->enemy_birds[i]->e_bitmap = enemy;
+    }
+    
+    state->player_bird->e_sprite = loadSpriteFromBitmap(state->pd, state->player_bird->e_bitmap, kBitmapUnflipped);
     state->background_sprite = loadSpriteFromBitmap(state->pd, state->background_bitmap, kBitmapUnflipped);
 //    state->bullet_sprites = loadSpriteFromBitmap(state->pd, state->bullet_bitmap, kBitmapUnflipped);
     for (int i = 0; i < BULLET_MAX; i++) {
-        state->bullet_sprites[i] = NULL;
+        state->player_bullets[i]->e_sprite = NULL;
+    }
+    for (int i = 0; i < ENEMY_MAX; i++) {
+        state->enemy_birds[i]->e_sprite = NULL;
     }
 }
 
@@ -68,28 +95,28 @@ void checkInitGameOver(GameState* state) {
 }
 
 void resetEnemyPosition(GameState* state) {
-    int currEnemyPosX = BG_MARGIN_LEFT - ENEMY_MARGIN_WIDTH; int currEnemyPosY = BG_MARGIN_TOP - ENEMY_MARGIN_HEIGHT;
-    state->enemy_world_pos_x[0] = currEnemyPosX; state->enemy_world_pos_y[0] = currEnemyPosY;
+    int currEnemyPosX = BG_MARGIN_LEFT + ENEMY_MARGIN_WIDTH; int currEnemyPosY = BG_MARGIN_TOP + ENEMY_MARGIN_HEIGHT;
+    state->enemy_birds[0]->e_world_pos_x = 0; state->enemy_birds[0]->e_world_pos_y = 0;
     for (int i = 1; i < ENEMY_MAX; i++) {
         // For layout of enemies on screen, start from the top of the screen with a certain margin,
         // if we reach the end of the screen, then reset the x position and start a new row
-        currEnemyPosX -= BG_SECTION_WIDTH;
-        if (currEnemyPosX <= BG_MARGIN_RIGHT) {
-            currEnemyPosX = BG_SECTION_WIDTH - ENEMY_WIDTH; currEnemyPosY -= BG_SECTION_HEIGHT - ENEMY_HEIGHT;
+        currEnemyPosX += BG_SECTION_WIDTH;
+        if (currEnemyPosX >= BG_MARGIN_RIGHT) {
+            currEnemyPosX = BG_SECTION_WIDTH + ENEMY_WIDTH; currEnemyPosY += BG_SECTION_HEIGHT + ENEMY_HEIGHT;
         }
-        state->enemy_world_pos_x[i] = currEnemyPosX; state->enemy_world_pos_y[i] = currEnemyPosY;
-        state->enemy_screen_pos_x[i] = INT32_MIN; state->enemy_screen_pos_y[i] = INT32_MIN;
+        state->enemy_birds[i]->e_world_pos_x = 0; state->enemy_birds[i]->e_world_pos_y = 0;
+        state->enemy_birds[i]->e_screen_pos_x = INT32_MIN; state->enemy_birds[i]->e_screen_pos_y = INT32_MIN;
     }
 }
 
 void resetPlayerPosition(GameState* state) {
-    state->player_world_pos_x = 0; state->player_world_pos_y = 0;
-    state->player_screen_pos_x = MIDPOINT_WIDTH; state->player_screen_pos_y = MIDPOINT_HEIGHT;
+    state->player_bird->e_world_pos_x = 0; state->player_bird->e_world_pos_y = 0;
+    state->player_bird->e_screen_pos_x = MIDPOINT_WIDTH; state->player_bird->e_screen_pos_y = MIDPOINT_HEIGHT;
     state->screen_world_pos_left = -MIDPOINT_WIDTH; state->screen_world_pos_right = MIDPOINT_WIDTH;
-    state->screen_world_pos_top = MIDPOINT_HEIGHT; state->screen_world_pos_bottom = -MIDPOINT_HEIGHT;
-    state->pd->sprite->moveTo(state->player_bird_sprite, MIDPOINT_WIDTH, MIDPOINT_HEIGHT);
+    state->screen_world_pos_top = -MIDPOINT_HEIGHT; state->screen_world_pos_bottom = MIDPOINT_HEIGHT;
+    state->pd->sprite->moveTo(state->player_bird->e_sprite, MIDPOINT_WIDTH, MIDPOINT_HEIGHT);
     state->pd->sprite->moveTo(state->background_sprite, 0, 0);
-    state->player_rot = 0;
+    state->player_bird->e_rotation = 0;
 }
 
 void initGameRunning(GameState* state) {
@@ -100,18 +127,17 @@ void initGameRunning(GameState* state) {
     state->curr_lives = STARTING_LIVES;
     state->curr_score_multiplier = SCORE_STARTING_MULTIPLIER;
     state->player_fired_shot = 0;
-    state->enemy_speed_x = ENEMY_STARTING_SPEED; state->enemy_speed_y = ENEMY_STARTING_SPEED;
     
     state->pd->sprite->addSprite(state->background_sprite);
-    state->pd->sprite->addSprite(state->player_bird_sprite);
+    state->pd->sprite->addSprite(state->player_bird->e_sprite);
     
     resetPlayerPosition(state);
     
     for (int i = 0; i < BULLET_MAX; i++) {
-        state->bullet_screen_pos_x[i] = INT32_MIN; state->bullet_screen_pos_y[i] = INT32_MIN;
-        state->enemy_world_pos_x[i] = INT32_MIN; state->enemy_world_pos_y[i] = INT32_MIN;
-        state->enemy_screen_pos_x[i] = INT32_MIN; state->enemy_screen_pos_y[i] = INT32_MIN;
-        state->enemy_bullet_pos_x[i] = INT32_MIN; state->enemy_bullet_pos_y[i] = INT32_MIN;
+        state->player_bullets[i]->e_screen_pos_x = INT32_MIN; state->player_bullets[i]->e_screen_pos_y = INT32_MIN;
+        state->enemy_birds[i]->e_world_pos_x = INT32_MIN; state->enemy_birds[i]->e_world_pos_y = INT32_MIN;
+        state->enemy_birds[i]->e_screen_pos_x = INT32_MIN; state->enemy_birds[i]->e_screen_pos_y = INT32_MIN;
+        state->enemy_bullets[i]->e_screen_pos_x = INT32_MIN; state->enemy_bullets[i]->e_screen_pos_y = INT32_MIN;
     }
     
     resetEnemyPosition(state);

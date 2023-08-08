@@ -16,10 +16,10 @@ void checkButtons(GameState* state) {
     state->pd->system->getButtonState(&current, &pushed, NULL);
     
     if (current & kButtonRight) {
-        state->player_rot += PLAYER_SPEED;
+        state->player_bird->e_rotation += PLAYER_SPEED;
     }
     else if (current & kButtonLeft) {
-        state->player_rot -= PLAYER_SPEED;
+        state->player_bird->e_rotation -= PLAYER_SPEED;
     }
     
     if (pushed & kButtonA || pushed & kButtonB || pushed & kButtonUp) { state->player_fired_shot = 1; }
@@ -28,5 +28,5 @@ void checkButtons(GameState* state) {
 
 void checkCrank(GameState* state) {
     float change = state->pd->system->getCrankChange();
-    state->player_rot = state->player_rot + (change * PLAYER_CRANK_SPEED);
+    state->player_bird->e_rotation = state->player_bird->e_rotation + (change * PLAYER_CRANK_SPEED);
 }

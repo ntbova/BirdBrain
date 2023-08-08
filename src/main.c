@@ -14,6 +14,9 @@ int eventHandler(PlaydateAPI* pd, PDSystemEvent event, uint32_t arg) {
         GameState* state = pd->system->realloc(NULL,sizeof(GameState));
         state->pd = pd;
         
+        // Basic Entities
+        initEntities(state);
+        
         // Graphics
         initGraphics(state);
         
@@ -26,8 +29,6 @@ int eventHandler(PlaydateAPI* pd, PDSystemEvent event, uint32_t arg) {
         initSound(state);
         
         state->curr_phase = pMainMenu;
-        state->enemy_move_time = state->pd->system->getCurrentTimeMilliseconds();
-        state->enemy_fire_time = state->pd->system->getCurrentTimeMilliseconds();
         state->curr_score = 0;
         
         pd->display->setRefreshRate(MAX_FRAMERATE);

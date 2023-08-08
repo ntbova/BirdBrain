@@ -13,6 +13,7 @@
 
 LCDBitmap* loadBitmapFromPath(PlaydateAPI* pd, char* path);
 LCDSprite* loadSpriteFromBitmap(PlaydateAPI* pd, LCDBitmap* bmp, LCDBitmapFlip flip);
+void initEntities(GameState* state);
 void initSound(GameState* state);
 void initGraphics(GameState* state);
 void checkInitGameOver(GameState* state);

@@ -26,12 +26,13 @@
 #define BG_MAX_BOTTOM 375.0f
 #define BG_SECTION_WIDTH 310.0f
 #define BG_SECTION_HEIGHT 177.5f
+#define BG_TESTING_BITMAP "images/blank"
 #define BULLET_HEIGHT 5.0f
 #define BULLET_WIDTH 5.0f
-#define ENEMY_HEIGHT 18.0f
-#define ENEMY_WIDTH 18.0f
+#define ENEMY_HEIGHT 84.0f
+#define ENEMY_WIDTH 92.0f
 #define BULLET_MAX 2
-#define ENEMY_MAX 16
+#define ENEMY_MAX 1
 #define MAX_FRAMERATE 50
 #define PLAYER_SPEED 3.0f
 #define PLAYER_CRANK_SPEED 0.5f
@@ -68,17 +69,41 @@ enum GamePhases {
     pGameOver = -1
 };
 
+enum EntityType {
+    ePlayerOne = 1,
+    ePlayerOneBullet = 2,
+    eBirdEnemy = 3,
+    eBirdEnemyBullet = 4,
+    ePerson = 5
+};
+
+typedef struct Entities {
+    enum EntityType type;
+    LCDBitmap* e_bitmap;
+    LCDBitmap* e_bitmap_rotated;
+    LCDSprite* e_sprite;
+    float e_world_pos_x;
+    float e_world_pos_y;
+    float e_screen_pos_x;
+    float e_screen_pos_y;
+    float e_pos_delta_x;
+    float e_pos_delta_y;
+    float e_rotation;
+    float e_rotation_sin;
+    float e_rotation_cos;
+    void (*moveEntity)(struct Entities* e);
+} Entity;
+
 typedef struct GameStates {
     PlaydateAPI* pd;
     LCDFont* title_font;
     LCDFont* score_font;
     PDSynth* player_fire_synth;
     PDSynth* enemy_fire_synth;
-    LCDBitmap* player_bird_bitmap;
-    LCDSprite* player_bird_sprite;
-    LCDBitmap* bullet_bitmap;
-    LCDBitmap* bullet_bitmaps_rot[BULLET_MAX];
-    LCDSprite* bullet_sprites[BULLET_MAX];
+    Entity* player_bird;
+    Entity* player_bullets[BULLET_MAX];
+    Entity* enemy_birds[ENEMY_MAX];
+    Entity* enemy_bullets[BULLET_MAX];
     LCDBitmap* background_bitmap;
     LCDSprite* background_sprite;
     enum GamePhases curr_phase;
@@ -90,29 +115,7 @@ typedef struct GameStates {
     float screen_world_pos_right;
     float screen_world_pos_top;
     float screen_world_pos_bottom;
-    float player_rot;
-    float player_world_pos_x;
-    float player_world_pos_y;
-    float player_screen_pos_x;
-    float player_screen_pos_y;
-    float player_pos_x_delta;
-    float player_pos_y_delta;
     uint8_t player_fired_shot;
-    float bullet_screen_pos_x[BULLET_MAX];
-    float bullet_screen_pos_y[BULLET_MAX];
-    float bullet_rots[BULLET_MAX];
-    float bullet_rots_sin[BULLET_MAX];
-    float bullet_rots_cos[BULLET_MAX];
-    float enemy_world_pos_x[ENEMY_MAX];
-    float enemy_world_pos_y[ENEMY_MAX];
-    float enemy_screen_pos_x[ENEMY_MAX];
-    float enemy_screen_pos_y[ENEMY_MAX];
-    int enemy_bullet_pos_x[BULLET_MAX];
-    int enemy_bullet_pos_y[BULLET_MAX];
-    int enemy_speed_x;
-    int enemy_speed_y;
-    int enemy_move_time;
-    int enemy_fire_time;
 } GameState;
 
 #endif /* consts_h */
