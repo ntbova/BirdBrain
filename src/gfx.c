@@ -29,8 +29,7 @@ void renderAssets(GameState* state) {
     else { bgGfxDeltaY = state->player_bird->e_pos_delta_y; state->screen_world_pos_top -= state->player_bird->e_pos_delta_y; state->screen_world_pos_bottom -= state->player_bird->e_pos_delta_y;  }
     
     // Render enemies
-    // Go through each of the enemy world positions. If the enemy world position is inside the bounds of the screen world position, render the
-    // enemy to the screen offset to the screen world position
+    // Go through each of the enemy world positions. If the enemy world position is inside the bounds of the screen world position, render the enemy to the screen offset to the screen world position
     for (int i = 0; i < ENEMY_MAX; i++) {
         if (state->enemy_birds[i]->e_world_pos_x + ENEMY_WIDTH >= state->screen_world_pos_left && state->enemy_birds[i]->e_world_pos_x - ENEMY_WIDTH <= state->screen_world_pos_right
             && state->enemy_birds[i]->e_world_pos_y + ENEMY_HEIGHT >= state->screen_world_pos_top && state->enemy_birds[i]->e_world_pos_y - ENEMY_HEIGHT <= state->screen_world_pos_bottom)
@@ -44,12 +43,16 @@ void renderAssets(GameState* state) {
             }
             
             state->pd->sprite->moveTo(state->enemy_birds[i]->e_sprite, enemyScreenPosX, enemyScreenPosY);
+            state->enemy_birds[i]->e_screen_pos_x = enemyScreenPosX;
+            state->enemy_birds[i]->e_screen_pos_y = enemyScreenPosY;
         }
         else {
             if (state->enemy_birds[i]->e_sprite != NULL) {
                 state->pd->sprite->removeSprite(state->enemy_birds[i]->e_sprite);
                 state->pd->sprite->freeSprite(state->enemy_birds[i]->e_sprite);
                 state->enemy_birds[i]->e_sprite = NULL;
+                state->enemy_birds[i]->e_screen_pos_x = INT32_MIN;
+                state->enemy_birds[i]->e_screen_pos_y = INT32_MIN;
             }
         }
     }

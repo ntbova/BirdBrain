@@ -100,6 +100,7 @@ void moveAssets(GameState* state) {
             for (int j = 0; j < ENEMY_MAX; j++) {
                 if (state->enemy_birds[j]->e_screen_pos_y != INT32_MIN) {
                     enemy.x = state->enemy_birds[j]->e_screen_pos_x; enemy.y = state->enemy_birds[j]->e_screen_pos_y;
+                    // Check if player's bullet has collided with enemy
                     if (check_collision(bullet, enemy)) {
                         state->player_bullets[i]->e_screen_pos_x = INT32_MIN; state->player_bullets[i]->e_screen_pos_y = INT32_MIN;
                         state->enemy_birds[j]->e_screen_pos_x = INT32_MIN; state->enemy_birds[j]->e_screen_pos_y = INT32_MIN;
@@ -148,5 +149,18 @@ void moveAssets(GameState* state) {
         incrementLevel(state);
     }
     else {
+        PDRect player, enemy;
+        player.x = state->player_bird->e_screen_pos_x; player.y = state->player_bird->e_screen_pos_y;
+        player.width = PLAYER_WIDTH; player.height = PLAYER_HEIGHT;
+        enemy.width = ENEMY_WIDTH; enemy.height = ENEMY_HEIGHT;
+        for (int j = 0; j < ENEMY_MAX; j++) {
+            // Check if enemy has collided with player
+            if (state->enemy_birds[j]->e_screen_pos_y != INT32_MIN) {
+                enemy.x = state->enemy_birds[j]->e_screen_pos_x; enemy.y = state->enemy_birds[j]->e_screen_pos_y;
+                if (check_collision(enemy, player)) {
+                    checkInitGameOver(state); break;
+                }
+            }
+        }
     }
 }

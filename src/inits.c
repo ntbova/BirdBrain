@@ -96,15 +96,15 @@ void checkInitGameOver(GameState* state) {
 
 void resetEnemyPosition(GameState* state) {
     int currEnemyPosX = BG_MARGIN_LEFT + ENEMY_MARGIN_WIDTH; int currEnemyPosY = BG_MARGIN_TOP + ENEMY_MARGIN_HEIGHT;
-    state->enemy_birds[0]->e_world_pos_x = 0; state->enemy_birds[0]->e_world_pos_y = 0;
+    state->enemy_birds[0]->e_world_pos_x = currEnemyPosX; state->enemy_birds[0]->e_world_pos_y = currEnemyPosY;
     for (int i = 1; i < ENEMY_MAX; i++) {
         // For layout of enemies on screen, start from the top of the screen with a certain margin,
         // if we reach the end of the screen, then reset the x position and start a new row
-        currEnemyPosX += BG_SECTION_WIDTH;
+        currEnemyPosX += ENEMY_MARGIN_WIDTH;
         if (currEnemyPosX >= BG_MARGIN_RIGHT) {
-            currEnemyPosX = BG_SECTION_WIDTH + ENEMY_WIDTH; currEnemyPosY += BG_SECTION_HEIGHT + ENEMY_HEIGHT;
+            currEnemyPosX = ENEMY_MARGIN_WIDTH + ENEMY_WIDTH; currEnemyPosY += ENEMY_MARGIN_HEIGHT + ENEMY_HEIGHT;
         }
-        state->enemy_birds[i]->e_world_pos_x = 0; state->enemy_birds[i]->e_world_pos_y = 0;
+        state->enemy_birds[i]->e_world_pos_x = currEnemyPosX; state->enemy_birds[i]->e_world_pos_y = currEnemyPosY;
         state->enemy_birds[i]->e_screen_pos_x = INT32_MIN; state->enemy_birds[i]->e_screen_pos_y = INT32_MIN;
     }
 }
