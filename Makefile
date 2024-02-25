@@ -27,7 +27,8 @@ SRC = src/main.c \
 	src/inits.c \
 	src/helpers.c \
 	src/gfx.c \
-	src/physics.c
+	src/physics.c \
+	src/json.c \
 	
 
 # List all user directories here

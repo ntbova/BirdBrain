@@ -21,8 +21,7 @@ int num_places(int n) {
     return r;
 }
 
-void get_dec_str(char* str, size_t len, uint32_t val)
-{
+void get_dec_str(char* str, size_t len, uint32_t val) {
     uint8_t i;
     for(i=1; i<=len; i++) {
         str[len-i] = (uint8_t) ((val % 10UL) + '0');

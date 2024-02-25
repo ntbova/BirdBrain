@@ -7,7 +7,7 @@
 
 #include "inits.h"
 #include "consts.h"
-
+#include "json.h"
 
 LCDBitmap* loadBitmapFromPath(PlaydateAPI* pd, char* path) {
     const char *err = NULL;
@@ -96,7 +96,8 @@ void checkInitGameOver(GameState* state) {
 
 void resetEnemyPosition(GameState* state) {
     int currEnemyPosX = BG_MARGIN_LEFT + ENEMY_MARGIN_WIDTH; int currEnemyPosY = BG_MARGIN_TOP + ENEMY_MARGIN_HEIGHT;
-    state->enemy_birds[0]->e_world_pos_x = currEnemyPosX; state->enemy_birds[0]->e_world_pos_y = currEnemyPosY;
+//    state->enemy_birds[0]->e_world_pos_x = currEnemyPosX; state->enemy_birds[0]->e_world_pos_y = currEnemyPosY;
+    state->enemy_birds[0]->e_screen_pos_x = INT32_MIN; state->enemy_birds[0]->e_screen_pos_x = INT32_MIN;
     for (int i = 1; i < ENEMY_MAX; i++) {
         // For layout of enemies on screen, start from the top of the screen with a certain margin,
         // if we reach the end of the screen, then reset the x position and start a new row
@@ -104,7 +105,7 @@ void resetEnemyPosition(GameState* state) {
         if (currEnemyPosX >= BG_MARGIN_RIGHT) {
             currEnemyPosX = ENEMY_MARGIN_WIDTH + ENEMY_WIDTH; currEnemyPosY += ENEMY_MARGIN_HEIGHT + ENEMY_HEIGHT;
         }
-        state->enemy_birds[i]->e_world_pos_x = currEnemyPosX; state->enemy_birds[i]->e_world_pos_y = currEnemyPosY;
+//        state->enemy_birds[i]->e_world_pos_x = currEnemyPosX; state->enemy_birds[i]->e_world_pos_y = currEnemyPosY;
         state->enemy_birds[i]->e_screen_pos_x = INT32_MIN; state->enemy_birds[i]->e_screen_pos_y = INT32_MIN;
     }
 }
@@ -141,6 +142,7 @@ void initGameRunning(GameState* state) {
     }
     
     resetEnemyPosition(state);
+    SetLevelData(state, 1);
     
     state->pd->graphics->setFont(state->score_font);
 }
