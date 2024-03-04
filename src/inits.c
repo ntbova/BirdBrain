@@ -136,12 +136,14 @@ void initGameRunning(GameState* state) {
     
     for (int i = 0; i < BULLET_MAX; i++) {
         state->player_bullets[i]->e_screen_pos_x = INT32_MIN; state->player_bullets[i]->e_screen_pos_y = INT32_MIN;
-        state->enemy_birds[i]->e_world_pos_x = INT32_MIN; state->enemy_birds[i]->e_world_pos_y = INT32_MIN;
-        state->enemy_birds[i]->e_screen_pos_x = INT32_MIN; state->enemy_birds[i]->e_screen_pos_y = INT32_MIN;
         state->enemy_bullets[i]->e_screen_pos_x = INT32_MIN; state->enemy_bullets[i]->e_screen_pos_y = INT32_MIN;
     }
     
-    resetEnemyPosition(state);
+    for (int i = 0; i < ENEMY_MAX; i++) {
+        state->enemy_birds[i]->e_world_pos_x = INT32_MIN; state->enemy_birds[i]->e_world_pos_y = INT32_MIN;
+        state->enemy_birds[i]->e_screen_pos_x = INT32_MIN; state->enemy_birds[i]->e_screen_pos_y = INT32_MIN;
+    }
+    
     SetLevelData(state, 1);
     
     state->pd->graphics->setFont(state->score_font);

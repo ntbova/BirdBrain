@@ -30,7 +30,7 @@
 #define ENEMY_HEIGHT 84.0f
 #define ENEMY_WIDTH 92.0f
 #define BULLET_MAX 2
-#define ENEMY_MAX 8
+#define ENEMY_MAX 4
 #define MAX_FRAMERATE 50
 #define PLAYER_SPEED 3.0f
 #define PLAYER_CRANK_SPEED 0.5f
